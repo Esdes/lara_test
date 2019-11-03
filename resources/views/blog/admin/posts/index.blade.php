@@ -4,6 +4,9 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-12">
+				
+				@include('blog.admin.posts.includes.result_messages')
+
 				<nav class="navbar navbar-toglable-md navbar-light bg-faded">
 					<a href="{{ route('admin.blog.posts.create') }}" class="btn btn-primary">Add</a>
 				</nav>

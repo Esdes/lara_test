@@ -145,6 +145,19 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__, request()->all(), $id);
+        //soft delete, post stay in db 
+        $result = BlogPost::destroy($id);
+
+        //delete post delete from db
+        //$result = BlogPost::find($id)->forceDelete();         
+
+        if($result) {
+            return redirect()
+                ->route('admin.blog.posts.index')
+                ->with(['success' => "Post with id [$id] was deleted"]);
+        } else {
+            return back()
+                ->withErrors(['errors' => "Error of delete post with id [$id]"]);
+        }
     }
 }
