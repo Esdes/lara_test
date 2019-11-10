@@ -37,6 +37,9 @@ Route::group($groupData, function(){
 		->names('admin.blog.categories');
 
 //Blog posts
+	Route::get('/posts/{post}/restore', 'PostController@restore')
+		->name('admin.blog.posts.restore');
+
 	Route::resource('/posts', 'PostController')
 		->except(['show'])
 		->names('admin.blog.posts');

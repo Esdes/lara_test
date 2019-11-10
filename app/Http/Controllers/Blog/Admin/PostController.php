@@ -154,10 +154,32 @@ class PostController extends BaseController
         if($result) {
             return redirect()
                 ->route('admin.blog.posts.index')
-                ->with(['success' => "Post with id [$id] was deleted"]);
+                ->with(['success' => "Post with id [$id] was deleted", 
+                        'restore' => "$id" ]);
         } else {
             return back()
                 ->withErrors(['errors' => "Error of delete post with id [$id]"]);
+        }
+    }
+
+    /**
+     * Restore the specified resource from trashed.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $item = $this->blogPostRepository->getTrashed($id);
+
+        $result = $item->restore();
+
+        if($result) {
+            return back()
+                ->with(['success' => "Post with id [$id] was restored"]);
+        } else {
+            return back()
+                ->withErrors(['errors' => "Error of restoring post with id [$id]"]);
         }
     }
 }

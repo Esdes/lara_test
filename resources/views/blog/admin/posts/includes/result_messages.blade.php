@@ -25,5 +25,13 @@
             {{ session()->get('success') }}
         </div>
     </div>
+@if (session('restore'))
+    <div class="col-md-11">
+        <a href="{{route('admin.blog.posts.restore', session()->get('restore'))}}" 
+            type="submit" 
+            class="btn btn-warning">Restore post id [{{ session()->get('restore') }}]
+        </a>
+    </div>
+@endif
 </div>
 @endif

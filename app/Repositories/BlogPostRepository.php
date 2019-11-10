@@ -24,7 +24,9 @@ class BlogPostRepository extends CoreRepository
 	 */
 	public function getEdit($id)
 	{
-		return $this->startConditions()->find($id);
+		$result = $this->startConditions()->find($id);
+
+		return $result;
 	}
 
 	/**
@@ -56,6 +58,22 @@ class BlogPostRepository extends CoreRepository
 				'user:id,name',
 			])
 			->paginate($page);
+
+		return $result;
+	}
+
+	/**
+	 *get trashed model for restore in admin panel
+	 * 
+	 * @param  int $id 
+	 * 
+	 * @return Model
+	 */
+	public function getTrashed($id)
+	{
+		$result = $this->startConditions()
+			->onlyTrashed()
+			->find($id);
 
 		return $result;
 	}
