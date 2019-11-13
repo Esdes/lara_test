@@ -45,11 +45,32 @@ Route::group($groupData, function(){
 		->names('admin.blog.posts');
 });
 
-Route::group($groupData,function(){
-	$methods = ['index', 'edit', 'update', 'create', 'store',];
-	
+//test ajax
+
+Route::group(['prefix' => 'tasks', 'namespace' => 'Test'], function () {
+
+    Route::get('/', [
+        'uses' => 'TasksController@index',
+        'as' => 'tasks.index',
+    ]);
+
+    Route::get('/{id}', [
+        'uses' => 'TasksController@show',
+        'as'   => 'tasks.show',
+    ]);
+
+    Route::post('/', [
+        'uses' => 'TasksController@store',
+        'as'   => 'tasks.store',
+    ]);
+
+    Route::put('/{id}', [
+        'uses' => 'TasksController@update',
+        'as'   => 'tasks.update',
+    ]);
+
+    Route::delete('/{id}', [
+        'uses' => 'TasksController@destroy',
+        'as'   => 'tasks.destroy',
+    ]);
 });
-
-//Route::resource('rest','RestTestController')->names('restTest');
-
-
